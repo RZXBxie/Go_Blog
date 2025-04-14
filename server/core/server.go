@@ -18,6 +18,6 @@ func RunServer() {
 
 	// 初始化服务器并启动
 	s := initServer(addr, Router)
-	global.Log.Info("server run success on ", zap.String("addr", addr))
+	global.Log.Info("server run success on ", zap.String("addr:", addr))
 	global.Log.Error(s.ListenAndServe().Error())
 }
