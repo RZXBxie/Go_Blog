@@ -15,5 +15,5 @@ var (
 	DB         *gorm.DB
 	ESClient   *elasticsearch.TypedClient
 	Redis      redis.Client
-	BlackCache local_cache.Cache
+	BlackCache local_cache.Cache // 黑名单缓存
 )
