@@ -17,3 +17,4 @@
 {"level":"ERROR","time":"2025-04-21T19:39:53.696+0800","caller":"flag/enter.go:65","msg":"Failed to export SQL data:","error":"exit status 2"}
 {"level":"ERROR","time":"2025-04-21T19:41:51.749+0800","caller":"flag/enter.go:65","msg":"Failed to export SQL data:","error":"exit status 2"}
 {"level":"INFO","time":"2025-04-21T19:42:38.121+0800","caller":"flag/enter.go:67","msg":"Successfully exported SQL data"}
+{"level":"INFO","time":"2025-04-21T20:06:36.048+0800","caller":"flag/enter.go:84","msg":"Successfully created ES indices"}

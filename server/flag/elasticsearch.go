@@ -4,13 +4,14 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"server/elasticsearch"
+	"server/model/elasticsearch"
 	"server/service"
 )
 
 func ElasticSearch() error {
 	esService := service.ServiceGroupApp.EsService
-	indexExists, err := esService.IndexExist(elasticsearch.ArticleIndex())
+	article := elasticsearch.ArticleIndex()
+	indexExists, err := esService.IndexExist(article)
 	if indexExists {
 		fmt.Println("The index already exists. Do you want to delete the data and recreate the index? (y/n)")
 		scanner := bufio.NewScanner(os.Stdin)
@@ -19,7 +20,7 @@ func ElasticSearch() error {
 		switch input {
 		case "y":
 			fmt.Println("Proceeding to delete the data and recreate the index...")
-			if err = esService.IndexDelete(elasticsearch.ArticleIndex()); err != nil {
+			if err = esService.IndexDelete(article); err != nil {
 				return err
 			}
 		case "n":
@@ -30,5 +31,5 @@ func ElasticSearch() error {
 			return ElasticSearch()
 		}
 	}
-	return esService.IndexCreate(elasticsearch.ArticleIndex(), elasticsearch.ArticleMapping())
+	return esService.IndexCreate(article, elasticsearch.ArticleMapping())
 }

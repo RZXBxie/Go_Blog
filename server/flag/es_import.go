@@ -7,9 +7,9 @@ import (
 	"github.com/elastic/go-elasticsearch/v8/typedapi/types"
 	"github.com/elastic/go-elasticsearch/v8/typedapi/types/enums/refresh"
 	"os"
-	"server/elasticsearch"
 	"server/global"
-	"server/other"
+	"server/model/elasticsearch"
+	"server/model/other"
 	"server/service"
 )
 

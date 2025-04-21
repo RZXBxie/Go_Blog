@@ -5,9 +5,9 @@ import (
 	"github.com/gofrs/uuid"
 	"golang.org/x/crypto/ssh/terminal"
 	"os"
-	"server/database"
 	"server/global"
 	"server/model/apptypes"
+	"server/model/database"
 	"server/utils"
 	"syscall"
 )

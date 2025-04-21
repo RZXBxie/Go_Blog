@@ -24,5 +24,5 @@ func SQLImport(sqlPath string) (errs []error) {
 			errs = append(errs, err)
 		}
 	}
-	return errs
+	return nil
 }
