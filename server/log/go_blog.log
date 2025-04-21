@@ -8,3 +8,12 @@
 {"level":"ERROR","time":"2025-04-21T19:08:02.063+0800","caller":"flag/enter.go:50","msg":"Invalid command usage:","error":"Only one command can be specified"}
 {"level":"INFO","time":"2025-04-21T19:10:37.789+0800","caller":"flag/enter.go:61","msg":"Successfully created table structure"}
 {"level":"INFO","time":"2025-04-21T19:12:05.654+0800","caller":"flag/enter.go:102","msg":"Successfully created an administrator"}
+{"level":"ERROR","time":"2025-04-21T19:24:58.843+0800","caller":"initialize/gorm.go:19","msg":"Failed to connect to mysql:","error":"dial tcp 127.0.0.1:3306: connectex: No connection could be made because the target machine actively refused it."}
+{"level":"INFO","time":"2025-04-21T19:27:01.912+0800","caller":"core/server.go:21","msg":"server run success on ","addr:":"0.0.0.0:8080"}
+{"level":"INFO","time":"2025-04-21T19:27:01.912+0800","caller":"initialize/cron.go:17","msg":"start","keysAndValues":null}
+{"level":"ERROR","time":"2025-04-21T19:37:06.621+0800","caller":"flag/enter.go:65","msg":"Failed to export SQL data:","error":"exit status 2"}
+{"level":"ERROR","time":"2025-04-21T19:37:45.323+0800","caller":"flag/enter.go:65","msg":"Failed to export SQL data:","error":"exit status 2"}
+{"level":"INFO","time":"2025-04-21T19:39:40.480+0800","caller":"flag/enter.go:61","msg":"Successfully created table structure"}
+{"level":"ERROR","time":"2025-04-21T19:39:53.696+0800","caller":"flag/enter.go:65","msg":"Failed to export SQL data:","error":"exit status 2"}
+{"level":"ERROR","time":"2025-04-21T19:41:51.749+0800","caller":"flag/enter.go:65","msg":"Failed to export SQL data:","error":"exit status 2"}
+{"level":"INFO","time":"2025-04-21T19:42:38.121+0800","caller":"flag/enter.go:67","msg":"Successfully exported SQL data"}

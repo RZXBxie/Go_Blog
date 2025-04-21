@@ -14,7 +14,7 @@ func SQLExport() error {
 
 	timer := time.Now().Format("20060102")
 	sqlPath := fmt.Sprintf("mysql_%s.sql", timer)
-	cmd := exec.Command("docker", "exec", "mysql", "mysqldump", "-u"+mysql.Username, "-p", mysql.Password, mysql.DBName, sqlPath)
+	cmd := exec.Command("docker", "exec", "mysql", "mysqldump", "-u"+mysql.Username, "-p"+mysql.Password, mysql.DBName)
 
 	outFile, err := os.Create(sqlPath)
 	if err != nil {
