@@ -12,6 +12,7 @@ type User struct {
 	UUID      uuid.UUID         `json:"uuid" gorm:"type:char(36);unique;not null"`
 	Username  string            `json:"username"`
 	Password  string            `json:"-"`
+	Email     string            `json:"email"`
 	OpenID    string            `json:"openid"`
 	Avatar    string            `json:"avatar" gorm:"size:255"` // 头像
 	Address   string            `json:"address"`

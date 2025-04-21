@@ -3,3 +3,8 @@
 {"level":"ERROR","time":"2025-04-15T00:51:03.981+0800","caller":"initialize/gorm.go:19","msg":"Failed to connect to mysql:","error":"dial tcp 127.0.0.1:3306: connectex: No connection could be made because the target machine actively refused it."}
 {"level":"INFO","time":"2025-04-15T00:56:11.749+0800","caller":"core/server.go:21","msg":"server run success on ","addr:":"0.0.0.0:8080"}
 {"level":"INFO","time":"2025-04-15T00:56:11.749+0800","caller":"initialize/cron.go:17","msg":"start","keysAndValues":null}
+{"level":"ERROR","time":"2025-04-21T19:02:12.663+0800","caller":"flag/enter.go:100","msg":"Failed to create an administrator:","error":"Error 1146 (42S02): Table 'blog_db.users' doesn't exist"}
+{"level":"ERROR","time":"2025-04-21T19:07:51.710+0800","caller":"flag/enter.go:133","msg":"Application execution encountered an error:","error":"flag provided but not defined: -user"}
+{"level":"ERROR","time":"2025-04-21T19:08:02.063+0800","caller":"flag/enter.go:50","msg":"Invalid command usage:","error":"Only one command can be specified"}
+{"level":"INFO","time":"2025-04-21T19:10:37.789+0800","caller":"flag/enter.go:61","msg":"Successfully created table structure"}
+{"level":"INFO","time":"2025-04-21T19:12:05.654+0800","caller":"flag/enter.go:102","msg":"Successfully created an administrator"}

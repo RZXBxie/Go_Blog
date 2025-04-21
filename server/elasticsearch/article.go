@@ -6,7 +6,7 @@ import "github.com/elastic/go-elasticsearch/v8/typedapi/types"
 type Article struct {
 	CreatedAt string `json:"created_at"`
 	UpdatedAt string `json:"updated_at"`
-	
+
 	Cover    string   `json:"cover"`   // 封面
 	Title    string   `json:"title"`   // 标题
 	Keyword  string   `json:"keyword"` // 文章标题-关键字
