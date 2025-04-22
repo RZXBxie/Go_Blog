@@ -18,3 +18,18 @@
 {"level":"ERROR","time":"2025-04-21T19:41:51.749+0800","caller":"flag/enter.go:65","msg":"Failed to export SQL data:","error":"exit status 2"}
 {"level":"INFO","time":"2025-04-21T19:42:38.121+0800","caller":"flag/enter.go:67","msg":"Successfully exported SQL data"}
 {"level":"INFO","time":"2025-04-21T20:06:36.048+0800","caller":"flag/enter.go:84","msg":"Successfully created ES indices"}
+{"level":"ERROR","time":"2025-04-22T13:55:40.768+0800","caller":"initialize/gorm.go:19","msg":"Failed to connect to mysql:","error":"dial tcp 127.0.0.1:3306: connectex: No connection could be made because the target machine actively refused it."}
+{"level":"INFO","time":"2025-04-22T13:56:02.229+0800","caller":"core/server.go:21","msg":"server run success on ","addr:":"0.0.0.0:8080"}
+{"level":"INFO","time":"2025-04-22T13:56:02.229+0800","caller":"initialize/cron.go:17","msg":"start","keysAndValues":null}
+{"level":"INFO","time":"2025-04-22T14:01:58.942+0800","caller":"core/server.go:21","msg":"server run success on ","addr:":"0.0.0.0:8080"}
+{"level":"INFO","time":"2025-04-22T14:01:58.942+0800","caller":"initialize/cron.go:17","msg":"start","keysAndValues":null}
+{"level":"INFO","time":"2025-04-22T17:41:01.902+0800","caller":"core/server.go:21","msg":"server run success on ","addr:":"0.0.0.0:8080"}
+{"level":"INFO","time":"2025-04-22T17:41:01.902+0800","caller":"initialize/cron.go:17","msg":"start","keysAndValues":null}
+{"level":"INFO","time":"2025-04-22T17:46:15.900+0800","caller":"core/server.go:21","msg":"server run success on ","addr:":"0.0.0.0:8080"}
+{"level":"INFO","time":"2025-04-22T17:46:15.900+0800","caller":"initialize/cron.go:17","msg":"start","keysAndValues":null}
+{"level":"INFO","time":"2025-04-22T17:54:46.945+0800","caller":"core/server.go:21","msg":"server run success on ","addr:":"0.0.0.0:8080"}
+{"level":"INFO","time":"2025-04-22T17:54:46.945+0800","caller":"initialize/cron.go:17","msg":"start","keysAndValues":null}
+{"level":"INFO","time":"2025-04-22T18:02:37.736+0800","caller":"core/server.go:21","msg":"server run success on ","addr:":"0.0.0.0:8080"}
+{"level":"INFO","time":"2025-04-22T18:02:37.736+0800","caller":"initialize/cron.go:17","msg":"start","keysAndValues":null}
+{"level":"INFO","time":"2025-04-22T18:10:00.943+0800","caller":"core/server.go:21","msg":"server run success on ","addr:":"0.0.0.0:8080"}
+{"level":"INFO","time":"2025-04-22T18:10:00.943+0800","caller":"initialize/cron.go:17","msg":"start","keysAndValues":null}
