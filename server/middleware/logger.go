@@ -1,6 +1,8 @@
 package middleware
 
 import (
+	"errors"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 	"net"
@@ -54,41 +56,51 @@ func GinRecovery(stack bool) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		defer func() {
 			if err := recover(); err != nil {
-				// 检查是否是连接断开的问题（如brokenPipe），这些错误不需要记录堆栈信息
 				var brokenPipe bool
-				if ne, ok := err.(*net.OpError); ok {
-					if se, ok := ne.Err.(*os.SyscallError); ok {
-						if strings.Contains(strings.ToLower(se.Error()), "broken pipe") || strings.Contains(strings.ToLower(se.Error()), "connection reset by peer") {
+				var e error
+				if tempErr, ok := err.(error); ok {
+					e = tempErr
+				} else {
+					e = fmt.Errorf("%v", err) // 转换为 error 处理
+				}
+
+				var netErr *net.OpError
+				if errors.As(e, &netErr) {
+					var syscallErr *os.SyscallError
+					if errors.As(netErr.Err, &syscallErr) {
+						errMsg := strings.ToLower(syscallErr.Error())
+						if strings.Contains(errMsg, "broken pipe") || strings.Contains(errMsg, "connection reset by peer") {
 							brokenPipe = true
 						}
 					}
 				}
+
 				// 获取请求体信息
 				httpRequest, _ := httputil.DumpRequest(c.Request, false)
-				// 如果是brokenPipe错误，只记录错误信息，不记录堆栈
+
 				if brokenPipe {
 					global.Log.Error(c.Request.URL.Path,
-						zap.Any("error", err),
+						zap.Any("error", e),
 						zap.String("request", string(httpRequest)),
 					)
-					// 由于连接断开，不能再向客户端写入状态码
-					_ = c.Error(err.(error)) // nolint: err check
+					_ = c.Error(e)
 					c.Abort()
 					return
 				}
-				// 如果是其他类型的 panic，根据 `stack` 参数决定是否记录堆栈信息
+
 				if stack {
 					global.Log.Error("[Recovery from panic]",
-						zap.Any("error", err),
+						zap.Any("error", e),
 						zap.String("request", string(httpRequest)),
 						zap.String("stack", string(debug.Stack())),
 					)
 				} else {
 					global.Log.Error("[Recovery from panic]",
-						zap.Any("error", err),
+						zap.Any("error", e),
 						zap.String("request", string(httpRequest)),
 					)
 				}
+
 				c.AbortWithStatus(http.StatusInternalServerError)
 			}
 		}()
