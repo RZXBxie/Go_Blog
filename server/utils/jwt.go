@@ -34,7 +34,7 @@ func (j *JWT) CreateAccessClaims(baseClaims request.BaseClaims) request.JwtCusto
 	claims := request.JwtCustomClaims{
 		BaseClaims: baseClaims,
 		RegisteredClaims: jwt.RegisteredClaims{
-			Audience:  jwt.ClaimStrings{"TAP"},                        // 受众
+			Audience:  jwt.ClaimStrings{"Go Blog"},                    // 受众
 			ExpiresAt: jwt.NewNumericDate(time.Now().Add(expiration)), // 过期时间
 			Issuer:    global.Config.Jwt.Issuer,                       // 签名的发起者
 		},
@@ -52,7 +52,7 @@ func (j *JWT) CreateRefreshClaims(baseClaims request.BaseClaims) request.JwtCust
 	claims := request.JwtCustomRefreshClaims{
 		UserID: baseClaims.UserID,
 		RegisteredClaims: jwt.RegisteredClaims{
-			Audience:  jwt.ClaimStrings{"TAP"},                        // 受众
+			Audience:  jwt.ClaimStrings{"Go Blog"},                    // 受众
 			ExpiresAt: jwt.NewNumericDate(time.Now().Add(expiration)), // 过期时间
 			Issuer:    global.Config.Jwt.Issuer,
 		},

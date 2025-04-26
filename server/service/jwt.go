@@ -11,8 +11,8 @@ import (
 type JwtService struct {
 }
 
-// SetRedisJWT 将JWT设置到redis中
-func (jwtService *JwtService) SetRedisJWT(jwt string, uuid uuid.UUID) error {
+// SetJwtToRedis 将JWT设置到redis中
+func (jwtService *JwtService) SetJwtToRedis(jwt string, uuid uuid.UUID) error {
 	duration, err := utils.ParseDuration(global.Config.Jwt.RefreshTokenExpiryTime)
 	if err != nil {
 		return err
@@ -20,7 +20,7 @@ func (jwtService *JwtService) SetRedisJWT(jwt string, uuid uuid.UUID) error {
 	return global.Redis.Set(uuid.String(), jwt, duration).Err()
 }
 
-func (jwtService *JwtService) GetRedisJWT(uuid uuid.UUID) (string, error) {
+func (jwtService *JwtService) GetJwtFromRedis(uuid uuid.UUID) (string, error) {
 	return global.Redis.Get(uuid.String()).Result()
 }
 

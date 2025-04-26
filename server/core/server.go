@@ -4,6 +4,7 @@ import (
 	"go.uber.org/zap"
 	"server/global"
 	"server/initialize"
+	"server/service"
 )
 
 type server interface {
@@ -14,7 +15,8 @@ func RunServer() {
 	addr := global.Config.System.Addr()
 	Router := initialize.InitRouter()
 
-	// TODO 加载所有的JWT黑名单，并存入本地缓存
+	// 加载所有JWT，并存入本地缓存
+	service.LoadAll()
 
 	// 初始化服务器并启动
 	s := initServer(addr, Router)
