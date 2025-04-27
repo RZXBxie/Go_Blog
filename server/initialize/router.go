@@ -16,20 +16,33 @@ func InitRouter() *gin.Engine {
 	gin.SetMode(global.Config.System.Env)
 	Router := gin.Default()
 	Router.Use(middleware.GinLogger(), middleware.GinRecovery(true))
-	
+
 	// 使用gin会话路由
+	// 给Gin框架的所有路由加上会话功能
 	var store = cookie.NewStore([]byte(global.Config.System.SessionsSecret))
 	Router.Use(sessions.Sessions("session", store))
-	
+
 	// 将指定目录下的文件提供给客户端
 	// "uploads" 是URL路径前缀，http.Dir("uploads")是实际文件系统中存储文件的目录
 	Router.StaticFS(global.Config.Upload.Path, http.Dir(global.Config.Upload.Path))
+	// 创建路由组
 	routerGroup := router.RouterGroupApp
-	
-	// 公共路由，api开头
+
+	// 公共路由组，所有人都可以访问
 	publicGroup := Router.Group(global.Config.System.RouterPrefix)
+
+	// 私有路由组，只有登录的用户才能访问
+	privateGroup := Router.Group(global.Config.System.RouterPrefix)
+	privateGroup.Use(middleware.JWTAuth())
+
+	// 管理员路由组，必须是管理员才能访问
+	adminGroup := Router.Group(global.Config.System.RouterPrefix)
+	adminGroup.Use(middleware.JWTAuth()).Use(middleware.AdminAuth())
 	{
 		routerGroup.InitBaseRouter(publicGroup)
+	}
+	{
+		routerGroup.InitUserRouter(privateGroup, publicGroup, adminGroup)
 	}
 	return Router
 }

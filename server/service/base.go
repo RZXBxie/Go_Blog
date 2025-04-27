@@ -3,6 +3,7 @@ package service
 import (
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
+	"go.uber.org/zap"
 	"server/global"
 	"server/utils"
 	"time"
@@ -12,14 +13,16 @@ type BaseService struct{}
 
 func (baseService *BaseService) SendEmailVerificationCode(c *gin.Context, to string) error {
 	verificationCode := utils.GenerateVerificationCode(6)
-	expirationTime := time.Now().Add(5 * time.Minute)
+	expirationTime := time.Now().Add(5 * time.Minute).Unix()
 
 	// 将验证码、发送邮箱和过期时间存入会话中
 	session := sessions.Default(c)
 	session.Set("verification_code", verificationCode)
 	session.Set("expiration_time", expirationTime)
 	session.Set("email", to)
-	_ = session.Save()
+	if err := session.Save(); err != nil {
+		global.Log.Error("Failed to save session:", zap.Error(err))
+	}
 
 	subject := "您的邮箱验证码"
 	body := `亲爱的用户[` + to + `]，<br/>

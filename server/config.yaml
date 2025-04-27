@@ -44,10 +44,10 @@ qiniu:
   use_https: true
   use_cdn_domains: true
 qq:
-  enable: false
-  app_id: "000000000"
-  app_key: xxxxxxxxxxxxxxxx
-  redirect_uri: http://xxx.xxx/xxx
+  enable: true
+  app_id: "1112363725"
+  app_key: GOs05dnOZ9cUbiCA
+  redirect_uri: http://xxx.xxx/login?flag=true
 redis:
   address: 127.0.0.1:6379
   password: ""

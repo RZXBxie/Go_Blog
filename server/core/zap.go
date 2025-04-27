@@ -39,6 +39,12 @@ func InitLogger() *zap.Logger {
 }
 
 func getLogWriter(zapConfig config.Zap) zapcore.WriteSyncer {
+	// 在打开日志之前，先清空原有内容
+	if err := os.Truncate(zapConfig.Filename, 0); err != nil {
+		// 如果清空失败，可以选择打印警告，但一般继续运行
+		log.Printf("Failed to truncate log file: %v", err)
+	}
+
 	lumberJackLogger := &lumberjack.Logger{
 		Filename:   zapConfig.Filename,
 		MaxSize:    zapConfig.MaxSize,

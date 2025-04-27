@@ -1,6 +1,5 @@
 package middleware
 
-import "C"
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/ua-parser/uap-go/uaparser"
@@ -12,7 +11,7 @@ import (
 
 func LoginRecord() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		C.Next()
+		c.Next()
 		// 异步记录日志
 		go func() {
 			gaodeService := service.ServiceGroupApp.GaodeService
