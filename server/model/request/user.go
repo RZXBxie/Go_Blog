@@ -48,3 +48,12 @@ type UserList struct {
 	Register *string `json:"register" form:"register"`
 	PageInfo
 }
+
+type UserFreeze struct {
+	UserID uint `json:"user_id"`
+}
+
+type UserLoginList struct {
+	UUID *string `json:"uuid" form:"uuid"`
+	PageInfo
+}

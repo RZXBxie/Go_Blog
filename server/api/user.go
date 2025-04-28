@@ -331,6 +331,7 @@ func (userApi *UserApi) UserChart(ctx *gin.Context) {
 	response.OkWithData(resp, ctx)
 }
 
+// UserList 管理员端获取用户列表
 func (userApi *UserApi) UserList(ctx *gin.Context) {
 	var req request.UserList
 	err := ctx.ShouldBindQuery(&req)
@@ -342,6 +343,60 @@ func (userApi *UserApi) UserList(ctx *gin.Context) {
 	if err != nil {
 		global.Log.Error("Failed to get user list", zap.Error(err))
 		response.FailWithMessage("Failed to get user list", ctx)
+		return
+	}
+	response.OkWithData(response.PageResult{
+		List:  list,
+		Total: total,
+	}, ctx)
+}
+
+// UserFreeze 冻结用户
+func (userApi *UserApi) UserFreeze(ctx *gin.Context) {
+	var req request.UserFreeze
+	err := ctx.ShouldBindJSON(&req)
+	if err != nil {
+		response.FailWithMessage(err.Error(), ctx)
+		return
+	}
+	err = userService.UserFreeze(req)
+	if err != nil {
+		global.Log.Error("Failed to freeze the user", zap.Error(err))
+		response.FailWithMessage("Failed to freeze the user", ctx)
+		return
+	}
+	response.OkWithMessage("Successfully frozon the user", ctx)
+}
+
+// UserUnfreeze 解冻用户
+func (userApi *UserApi) UserUnfreeze(ctx *gin.Context) {
+	var req request.UserFreeze
+	err := ctx.ShouldBindJSON(&req)
+	if err != nil {
+		response.FailWithMessage(err.Error(), ctx)
+		return
+	}
+	err = userService.UserUnfreeze(req)
+	if err != nil {
+		global.Log.Error("Failed to unfreeze the user", zap.Error(err))
+		response.FailWithMessage("Failed to unfreeze the user", ctx)
+		return
+	}
+	response.OkWithMessage("Successfully unfrozen the user", ctx)
+}
+
+// UserLoginList 获取登录日志列表
+func (userApi *UserApi) UserLoginList(ctx *gin.Context) {
+	var req request.UserLoginList
+	err := ctx.ShouldBindQuery(&req)
+	if err != nil {
+		response.FailWithMessage(err.Error(), ctx)
+		return
+	}
+	list, total, err := userService.UserLoginList(req)
+	if err != nil {
+		global.Log.Error("Failed to get login list", zap.Error(err))
+		response.FailWithMessage("Failed to get login list", ctx)
 		return
 	}
 	response.OkWithData(response.PageResult{

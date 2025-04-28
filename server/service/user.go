@@ -173,8 +173,36 @@ func (userService *UserService) UserList(req request.UserList) (interface{}, int
 	return utils.MySQLPagination(&database.User{}, option)
 }
 
-func (userService *UserService) UserFreeze() {}
+func (userService *UserService) UserFreeze(req request.UserFreeze) error {
+	var user database.User
+	jwtService := ServiceGroupApp.JwtService
+	if err := global.DB.Take(&user, req.UserID).Update("freeze", true).Error; err != nil {
+		return err
+	}
+	jwtStr, _ := jwtService.GetJwtFromRedis(user.UUID)
+	if jwtStr != "" {
+		_ = jwtService.InsertIntoBlacklist(database.JWTBlacklist{Jwt: jwtStr})
+	}
+	return nil
+}
 
-func (userService *UserService) UserUnfreeze() {}
+func (userService *UserService) UserUnfreeze(req request.UserFreeze) error {
+	return global.DB.Take(&database.User{}, req.UserID).Update("freeze", false).Error
+}
 
-func (userService *UserService) UserLoginList() {}
+func (userService *UserService) UserLoginList(req request.UserLoginList) (interface{}, int64, error) {
+	db := global.DB
+	if req.UUID != nil {
+		var userID uint
+		if err := global.DB.Model(database.User{}).Where("uuid = ?", req.UUID).Pluck("id", &userID).Error; err != nil {
+			return nil, 0, err
+		}
+		db.Where("user_id = ?", userID)
+	}
+	option := other.MySQLOption{
+		PageInfo: req.PageInfo,
+		Where:    db,
+		Preload:  []string{"User"},
+	}
+	return utils.MySQLPagination(&database.Login{}, option)
+}
