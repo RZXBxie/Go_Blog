@@ -20,8 +20,8 @@ gaode:
   enable: true
   key: 7f6a94739d4ac0bb4d4848ed914857ed
 jwt:
-  access_token_secret: xBz6K3WWnC_37MpfZfB9LetBca1yAPIoozRtgwoq6xk=z
-  refresh_token_secret: cFilaGHcDlh-vM1JkZHHog_y2MAwMn_IJn_b_qy0iPY=
+  access_token_secret: YQcLuKaDkQGFOuIs9xjhZ5uSfV3YZ7kn38gwi2Fmji0=
+  refresh_token_secret: NncytBKHLXDQXftWyQz7J2PCVxv7GgNJz04ltqEMpM0=
   access_token_expiry_time: 2h
   refresh_token_expiry_time: 7d
   issuer: go_blog

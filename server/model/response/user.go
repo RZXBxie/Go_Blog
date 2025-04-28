@@ -18,3 +18,9 @@ type UserCard struct {
 	Address   string    `json:"address"`
 	Signature string    `json:"signature"`
 }
+
+type UserChart struct {
+	DateList     []string `json:"date_list"`
+	LoginData    []int    `json:"login_data"`
+	RegisterData []int    `json:"register_data"`
+}

@@ -36,7 +36,7 @@ func JWTAuth() gin.HandlerFunc {
 			if accessToken == "" || errors.Is(err, utils.TokenExpired) {
 
 				// 尝试解析refreshToken
-				refreshClaims, err := j.ParseRefreshToken(accessToken)
+				refreshClaims, err := j.ParseRefreshToken(refreshToken)
 				if err != nil {
 					utils.ClearRefreshToken(c)
 					response.NoAuth("Refresh Token expired or invalid", c)
@@ -71,7 +71,7 @@ func JWTAuth() gin.HandlerFunc {
 				c.Header("new-access-token", newAccessToken)
 				c.Header("new-access-expires-at", strconv.FormatInt(newAccessClaims.ExpiresAt.Unix(), 10))
 
-				c.Set("claims", newAccessClaims)
+				c.Set("claims", &newAccessClaims)
 				c.Next()
 				return
 			}
