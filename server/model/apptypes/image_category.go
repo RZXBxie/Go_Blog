@@ -23,7 +23,7 @@ func (c *Category) UnmarshalJSON(data []byte) error {
 	if err := json.Unmarshal(data, &s); err != nil {
 		return err
 	}
-	*c = toCategory(s)
+	*c = ToCategory(s)
 	return nil
 }
 
@@ -50,7 +50,7 @@ func (c Category) String() string {
 	return str
 }
 
-func toCategory(s string) Category {
+func ToCategory(s string) Category {
 	var c Category
 	switch s {
 	case "未使用":
